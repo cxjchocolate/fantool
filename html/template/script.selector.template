@@ -1,0 +1,17 @@
+<table>
+    <thead>
+    <tr>
+        <td>全选</td>
+        <td>Script Name</td>
+        <td>备注</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for obj in objs %}
+        <tr>
+            <td><input type="radio" name="script" value="{{obj.id}}:{{obj.name}}"/></td>
+            <td>{{obj.name}}</td>
+        </tr>
+        {% end %}
+    <tbody>
+</table>

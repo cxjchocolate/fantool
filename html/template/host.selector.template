@@ -1,0 +1,19 @@
+<table>
+    <thead>
+    <tr>
+        <td>全选</td>
+        <td>Host Name</td>
+        <td>Host IP</td>
+        <td>备注</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for obj in objs %}
+        <tr>
+            <td><input type="radio" name="host" value="{{obj.id}}:{{obj.name}}"/></td>
+            <td>{{obj.name}}</td>
+            <td>{{obj.ip}}</td>
+        </tr>
+        {% end %}
+    <tbody>
+<div>

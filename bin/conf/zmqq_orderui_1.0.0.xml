@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="zmqq-orderui" basedir="." default="commit">
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+    <property name="target" value="${orderui}/branches/branches_quqi" />
+    <property name="tst_tag" value="${orderui}/tags/zmqq_test_1.0.0"/>
+    <property name="prd_tag" value="${orderui}/tags/zmqq_production_1.0.0"/>
+    <property name="dist" value="${target}/dist" />
+    
+    <path id="targets">
+      <pathelement path="${tst_tag}"/>
+      <pathelement path="${prd_tag}"/>
+    </path>
+    <property name="commit_dir" value="${tst_tag} ${prd_tag}" />
+    <property name="update_dir" value="${target} ${test_tag} ${prd_tag}"/>
+            
+    <!-- grunt打包 -->
+    <target name="grunt" depends="update">
+     <exec executable="grunt" >
+      	<arg line="--gruntfile ${target}/Gruntfile.js"/>
+	    </exec>
+      <exec executable="grunt" >
+      	<arg line="--gruntfile ${target}/Gruntfile_deploy.js"/>
+	    </exec>
+      <for list="" param="dir">
+      	<path refid="targets"/>
+      	<sequential>
+          <exec executable="svn" >
+            <arg line="delete @{dir}" />
+          </exec>
+          <mkdir dir="@{dir}"/>
+	        <copy todir="@{dir}" >
+	        	<fileset dir="${dist}">
+							<include name="**/*" />
+						</fileset>
+					</copy>
+          <exec executable="svn" >
+		        <arg line="add @{dir} --force"/>
+	        </exec>
+	      </sequential>
+	    </for>
+    </target>
+   
+    <!--update -->
+		<target name="update">
+			<for list="${update_dir}" param="dir">
+				<sequential>
+			    <exec executable="svn" >
+						<arg line="update @{dir} --username ${svn.user} --password ${svn.password}"/>
+	        </exec>
+	      </sequential>
+	    </for>
+		</target>
+
+			<!--commit -->
+		<target name="commit" depends="grunt">
+			<exec executable="svn" >
+						<arg line="commit ${commit_dir} -m 'Ant target:Package ${ant.project.name}' --username ${svn.user} --password ${svn.password}"/>
+	    </exec>
+		</target> 
+ 
+</project>

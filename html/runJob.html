@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fanui.css">
+</head>
+<body>
+{% include "menu.html" %}
+<div class="container">
+    <div>
+        <div class="job-container">
+            <div class="job-header">
+                <label for="job-name">Job Name: </label>
+                <input type="text" name="job-name" id="job-name">
+                <input type="hidden" name="job-id" id="job-id">
+            </div>
+            <div class="job-body">
+            </div>
+            <div class="btn btn-large btn-blue add-job-detail-row"><i class="icon-plus"></i>添加行</div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/fanui.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+</script>
+</html>

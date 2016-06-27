@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <!-- HTTP 1.0 -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <!-- Prevent caching at the proxy server -->
+    <meta http-equiv="expires" content="0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>发布历史</title>
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/fanui.css">
+</head>
+<body>
+    {% include "menu.html" %}
+    <div class="container">
+        <div class="container-header">
+            <div class="search-condition">
+                <label for="from">From:</label>
+                <input type="text" id="from" name="from">
+                <label for="to">To:</label>
+                <input type="text" id="to" name="to">
+            </div>
+        </div>
+        <div class="container-body">
+            <div class="search-result"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/fanui.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var from = $( "#from");
+        var to = $( "#to");
+        from.val( formatDate(new Date()));
+        to.val( formatDate(new Date(new Date().getTime() + day_gap)));
+        search("AppHistory", from.val(), to.val());
+
+        from.datepicker({
+            changeMonth: true,
+            showButtonPanel: true,
+            buttonText: "确定",
+            closeText: "取消",
+            dateFormat: "yy-mm-dd",
+            onClose: function( selectedDate ) {
+                search("AppHistory", selectedDate, to.val());
+                to.datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        to.datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            showButtonPanel: true,
+            buttonText: "确定",
+            closeText: "取消",
+            dateFormat: "yy-mm-dd",
+            onClose: function( selectedDate ) {
+                search("AppHistory", from.val(), selectedDate);
+                from.datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+    });
+</script>
+</html>

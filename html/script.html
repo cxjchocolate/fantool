@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>脚本管理</title>
+    <link rel="stylesheet" href="css/script.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fanui.css">
+    <link rel="stylesheet" href="css/multiple-select.css">
+</head>
+<body>
+    {% include "menu.html" %}
+    <div class="container">
+        <div class="container-header">
+            <div class="btn btn-large btn-blue" id="addInstance" onclick="">
+                <i class="icon-plus"></i>
+                添加脚本实例
+            </div>
+            <div class="search-condition">
+                <label for="from">From:</label>
+                <input type="text" id="from" name="from">
+                <label for="to">To:</label>
+                <input type="text" id="to" name="to">
+            </div>
+        </div>
+        <div class="container-body">
+            <div class="search-result"></div>
+        </div>
+    </div>
+    <div id="dialog-form" class="fanui" title="添加脚本实例">
+        <form>
+            <fieldset>
+                <label for="script-name">Script Name: </label>
+                <input type="text" name="script-name" id="script-name" class="text ui-widget-content ui-corner-all">
+                <input type="hidden" name="script-id" id="script-id">
+                <textarea id="script-content" class="input small ghosted" style="margin: 0px; height: 200px;"></textarea>
+            </fieldset>
+        </form>
+    </div>
+    <div id="dialog-form2" class="fanui" title="运行脚本">
+        <form>
+            <fieldset>
+                <input type="hidden" name="script-id2" id="script-id2">
+                <select id="host-selector" multiple="multiple"/>
+            </fieldset>
+        </form>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/fanui.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/base64.js"></script>
+<script type="text/javascript" src="js/multiple-select.js"></script>
+</html>

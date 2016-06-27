@@ -1,0 +1,19 @@
+.small {
+    height: 12em;
+}
+.ghosted {
+    color: #000000;
+}
+.input {
+    width: 100%;
+}
+
+div.script-tool {
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+textarea {
+    margin-top: 5px;
+}

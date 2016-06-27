@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <th>Server Name</th>
+            <th>主机名</th>
+            <th>SSH Port</th>
+            <th>Server Type</th>
+            <th>Server Port</th>
+            <th>应用目录</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.name}}</td>
+            <td>{{obj.host}}</td>
+            <td>{{obj.ssh_port}}</td>
+            <td>{{obj.type}}</td>
+            <td>{{obj.port}}</td>
+            <td>{{obj.webapp_home}}</td>
+            <td><div class="script-tool" onclick="getServer({{obj.id}})"><i class="icon-edit"></i></div></td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>

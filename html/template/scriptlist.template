@@ -1,0 +1,22 @@
+<table>
+    <thead>
+        <tr>
+            <th>Script Name</th>
+            <th>创建日期</th>
+            <th>更新日期</th>
+            <th>Tags</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.name}}</td>
+            <td>{{obj.createtime}}</td>
+            <td>{{obj.lastupdate}}</td>
+            <td>{{obj.tag}}</td>
+            <td><div class="script-tool" onclick="getScript({{obj.id}})"><i class="icon-edit"></i></div><div class="script-tool" onclick="showScriptConsole({{obj.id}})"><i class="icon-play"></i></div></div></td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>

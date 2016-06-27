@@ -1,0 +1,831 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>应用发布</title>
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/app.css">
+    <!--<link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.min.css">-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fanui.css">
+</head>
+{% include "menu.html" %}
+<div class="container">
+    <div class="brand-container">
+        <table>
+            <tbody>
+            <tr class="brand">
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> JoySeed(测试)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Server:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-green" onclick="flushmem('joyseed','redis01_test');">
+                                    <i class="icon-trash"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" onclick="keysmem('joyseed','redis01_test');">
+                                    <i class="icon-key"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" data-action="restartServer"
+                                     data-brand="joyseed" data-res="tomcat01_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-refresh"></i>
+                                    tomcat
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OrderUI:</div>
+                            </td>
+                            <td>                  
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="orderui_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="orderui_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">Weixin:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="buildxml"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="weixin_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="weixin_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OMS:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_oms_1.0.1"
+                                     data-version="1.0.1" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="oms_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="oms_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCHEDULE:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_schedule_1.0.1"
+                                     data-version="1.0.1" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="schedule_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="schedule_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="scm_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="scm_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">DeliveryUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp"
+                                     data-buildxml="default_scm_1.0.0" data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="joyseed"
+                                     data-app="delivery_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="joyseed" data-app="delivery_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> 下午茶(测试)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Server:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-green" onclick="flushmem('tea','redis01_test');">
+                                    <i class="icon-trash"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" onclick="keysmem('tea','redis01_test');">
+                                    <i class="icon-key"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" data-action="restartServer"
+                                     data-brand="tea" data-res="tomcat01_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-refresh"></i>
+                                    tomcat
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OrderUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea"
+                                     data-app="orderui_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="orderui_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">Weixin:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="buildxml"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea" data-app="weixin_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="weixin_test"
+                                     onclick="infoApp(event);"><i class="icon-info-sign"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OMS:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="tea_oms_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea" data-app="oms_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="oms_test" onclick="infoApp(event);">
+                                    <i
+                                            class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCHEDULE:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="tea_schedule_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea"
+                                     data-app="schedule_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="schedule_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea" data-app="scm_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="scm_test" onclick="infoApp(event);">
+                                    <i
+                                            class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">DeliveryUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="tea"
+                                     data-app="delivery_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="tea" data-app="delivery_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> 原麦山丘(测试)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Server:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-green" onclick="flushmem('wheat','redis01_test');">
+                                    <i class="icon-trash"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" onclick="keysmem('wheat','redis01_test');">
+                                    <i class="icon-key"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" data-action="restartServer"
+                                     data-brand="wheat" data-res="tomcat01_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-refresh"></i>
+                                    tomcat
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OrderUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat"
+                                     data-app="orderui_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="orderui_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">Weixin:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="buildxml"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat"
+                                     data-app="weixin_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="weixin_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OMS:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="wheat_oms_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat" data-app="oms_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="oms_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCHEDULE:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="wheat_schedule_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat"
+                                     data-app="schedule_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="schedule_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat" data-app="scm_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="scm_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">DeliveryUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="wheat"
+                                     data-app="delivery_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="wheat" data-app="delivery_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> 祖母曲奇(测试)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Server:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-green" onclick="flushmem('zmqq','redis01_test');">
+                                    <i class="icon-trash"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" onclick="keysmem('zmqq','redis01_test');">
+                                    <i class="icon-key"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" data-action="restartServer"
+                                     data-brand="zmqq" data-res="tomcat01_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-refresh"></i>
+                                    tomcat
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OrderUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq"
+                                     data-app="orderui_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="orderui_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">Weixin:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="buildxml"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq"
+                                     data-app="weixin_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="weixin_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OMS:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="zmqq_oms_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq" data-app="oms_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="oms_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCHEDULE:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="zmqq_schedule_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq"
+                                     data-app="schedule_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="schedule_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq" data-app="scm_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="scm_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">DeliveryUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="zmqq"
+                                     data-app="delivery_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="zmqq" data-app="delivery_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+
+            </tr>
+            <tr class="brand">
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> 鲜花(测试)</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Server:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-green" onclick="flushmem('flower','redis01_test');">
+                                    <i class="icon-trash"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" onclick="keysmem('flower','redis01_test');">
+                                    <i class="icon-key"></i>
+                                    redis
+                                </div>
+                                <div class="btn btn-green" data-action="restartServer"
+                                     data-brand="flower" data-res="tomcat01_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-refresh"></i>
+                                    tomcat
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OrderUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower"
+                                     data-app="orderui_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="orderui_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">Weixin:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="buildxml"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower"
+                                     data-app="weixin_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="weixin_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">OMS:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="flower_oms_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower" data-app="oms_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="oms_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCHEDULE:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="flower_schedule_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower"
+                                     data-app="schedule_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="schedule_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower" data-app="scm_test"
+                                     onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="scm_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">DeliveryUI:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"
+                                     style="display:none">
+                                    <i class="icon-suitcase"></i>
+                                    Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="flower"
+                                     data-app="delivery_test" onclick="ts.addTerm(event);">
+                                    <i class="icon-cloud-upload"></i>
+                                    Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="flower" data-app="delivery_test"
+                                     onclick="infoApp(event);"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> BI</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">SCM:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="default_scm_1.0.0"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"><i
+                                        class="icon-suitcase"></i> Pack
+                                </div>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="bi" data-app="scm_test"
+                                     onclick="ts.addTerm(event);"><i
+                                        class="icon-cloud-upload"></i> Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="bi" data-app="yun_test" onclick="infoApp(event)"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="app">YUN:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="deployApp" data-brand="bi" data-app="yun_test"
+                                     onclick="ts.addTerm(event);"><i
+                                        class="icon-cloud-upload"></i> Deploy
+                                </div>
+                                <div class="btn btn-red" data-brand="bi" data-app="scm_test" onclick="infoApp(event)"><i
+                                        class="icon-info-sign"></i></div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <div class="brand-large"><i class="icon-chevron-right"></i> Others</div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="app">Haiyan:</div>
+                            </td>
+                            <td>
+                                <div class="btn btn-red" data-action="packApp" data-buildxml="haiyan"
+                                     data-version="1.0.0" onclick="ts.addTerm(event);"><i
+                                        class="icon-suitcase"></i> Pack
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="brand-selector-container" id="brand-selector-container" style="display: none;">
+        <label>品牌</label>
+        <select id="brandselect"></select>
+        <label>应用</label>
+        <select id="appselect"></select>
+        <label>主SVN</label>
+        <select id="masterSvnselect"></select>
+        <label>配置SVN</label>
+        <select id="configSvnselect"></select>
+        <div id="standard-deploy" class="btn standard-deploy" data-action="standard-deploy" onclick="standardDeploy(event)">发布应用</div>
+    </div>
+    <div class="task-container" id="task-container">
+        <i class="icon-tasks"></i> 当前进行中任务
+        <ol id="task-list" class="task-list"></ol>
+    </div>
+    <div class="console-container">
+        <div class="btn" onclick="clearConsole();"><i class="icon-ban-circle"></i> 清空控制台</div>
+        <div id="console" class="console"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/runApp.js"></script>
+<script type="text/javascript" src="js/fanui.js"></script>
+<script type="text/javascript">
+    var ts = new Terminal();
+</script>
+</html>

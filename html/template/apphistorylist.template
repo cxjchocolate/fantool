@@ -1,0 +1,23 @@
+{%import ui_utils %}
+<table>
+    <thead>
+        <tr>
+            <th>品牌</th>
+            <th>模块</th>
+            <th class="long">主版本SVN:主版本号</th>
+            <th class="long">配置SVN:配置版本</th>
+            <th>发布时间</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.brand}}</td>
+            <td>{{obj.name}}</td>
+            <td>{{ui_utils.beautySVNURL(obj.master_url)}}:{{obj.master_rev}}</td>
+            <td>{{ui_utils.beautySVNURL(obj.config_url)}}:{{obj.config_rev}}</td>
+            <td>{{obj.createtime}}</td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>

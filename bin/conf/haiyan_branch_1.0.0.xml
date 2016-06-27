@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="haiyan-branch-1.0.0" basedir="." default="commit">
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+    <property name="srcdir" value="${haiyan}/branches/branch_1.0.0" />
+    <property name="dist" value="${haiyan}/tags/production_1.0.0/target/classes" />
+    <property name="jar_dir" value="${haiyan}/tags/production_1.0.0/target" />
+    <tstamp />
+    <property name="jarfilename" value="${ant.project.name}-${DSTAMP}${TSTAMP}.jar" />
+    
+ <!--   <path id="targets">
+      <pathelement path="${soa}/tags/zmqq_OMS_production_1.0.0/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/zmqq_OMS_test_1.0.0/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/zmqq_schedule_production_1.0.0/WebContent/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/zmqq_schedule_test_1.0.0/WebContent/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/tea_OMS_production_1.0.0/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/tea_OMS_test_1.0.0/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/tea_schedule_production_1.0.0/WebContent/WEB-INF/lib/"/>
+      <pathelement path="${soa}/tags/tea_schedule_test_1.0.0/WebContent/WEB-INF/lib/"/>
+    </path>
+ -->
+    <property name="commit_dir" value="${haiyan}/tags/production_1.0.0/target/" />    
+    <fileset id="deploylib" dir="${basedir}/../lib">
+		<include name="*.jar"/>
+    </fileset>
+        
+    <!-- javac编译 -->
+    <target name="compile" depends="update">
+      <delete dir="${dist}" failonerror="false" deleteonexit="true" excludes="**/lib"/>
+      <delete> 
+        <fileset dir="${jar_dir}" includes="${ant.project.name}*.jar"/>
+      </delete>
+      <mkdir dir="${dist}"/>        
+      <javac nowarn="true" destdir="${dist}" source="1.7" target="1.7" encoding="utf-8" fork="true"  includeantruntime="false">
+            <src path="${srcdir}/haiyan-common/src/main/java"/>
+            <src path="${srcdir}/haiyan-config/src/main/java"/>
+            <src path="${srcdir}/haiyan-exp/src/main/java"/>
+            <src path="${srcdir}/haiyan-cache/src/main/java"/>
+            <src path="${srcdir}/haiyan-database/src/main/java"/>
+            <src path="${srcdir}/haiyan-orm/src/main/java"/>
+            <src path="${srcdir}/haiyan-bill/src/main/java"/>
+            <src path="${srcdir}/haiyan-web/src/main/java"/>
+            <!--<excludesfile name="${haiyan}/trunk/haiyan-database/src/main/java/haiyan/database/SybaseDatabase.java" />-->
+            <classpath>
+              <fileset refid="deploylib"/>
+            </classpath>
+        </javac>
+    </target>
+    
+    <!-- jar -->
+    <target name="jar" depends="compile">				
+		  <jar destfile="${jar_dir}/${jarfilename}" basedir="${dist}" excludes="*.xml,*.properties" />	
+		  <exec executable="svn" >
+		        <arg line="add ${jar_dir}/${jarfilename}"/>
+	    </exec>
+    </target>
+    
+  <!--update -->
+	<target name="update">
+		<exec executable="svn" >
+      <arg line="update ${soa} --username ${svn.user} --password ${svn.password}"/>
+	  </exec>
+		<exec executable="svn" >
+			<arg line="update ${scm} --username ${svn.user} --password ${svn.password}"/>
+	  </exec>
+		<exec executable="svn" >
+			<arg line="update ${haiyan} --username ${svn.user} --password ${svn.password}"/>
+	  </exec>
+	</target>
+		
+	<!--commit -->
+	<target name="commit" depends="jar">	      
+		<exec executable="svn" >
+			<arg line="commit ${commit_dir}  -m '-------ant target-------' --username ${svn.user} --password ${svn.password}"/>
+	  </exec>
+	</target>
+</project>

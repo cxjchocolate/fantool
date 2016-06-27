@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>应用管理</title>
+    <link rel="stylesheet" href="css/script.css">
+    <link rel="stylesheet" href="css/site.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fanui.css">
+    <link rel="stylesheet" href="css/multiple-select.css">
+</head>
+<body>
+{% include "menu.html" %}
+<div class="container">
+    <div class="container-header">
+        <div class="btn btn-large btn-blue" id="addInstance" onclick="">
+            <i class="icon-plus"></i>
+            添加应用
+        </div>
+    </div>
+    <div class="container-body">
+        <div class="search-result"></div>
+    </div>
+</div>
+<div id="dialog-form" class="fanui" title="发布新应用">
+    <form>
+        <fieldset>
+            <input type="hidden" name="app-id" id="app-id"></td>
+            <table>
+                <tr>
+                    <td><label for="brand-name">Brand Name: </label></td>
+                    <td><input type="text" name="brand-name" id="brand-name"
+                               class="text ui-widget-content ui-corner-all">
+                </tr>
+                <tr>
+                    <td><label for="app-name">App Name: </label></td>
+                    <td><input type="text" name="app-name" id="app-name" class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="master-svn">Master SVN: </label>
+                    </td>
+                    <td><input type="text" name="master-svn" id="master-svn"
+                               class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="config-svn">Config SVN: </label>
+                    </td>
+                    <td><input type="text" name="config-svn" id="config-svn"
+                               class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="context">App Context: </label>
+                    </td>
+                    <td><input type="text" name="context" id="context"
+                               class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="server-selector">Servers: </label>
+                    </td>
+                    <td>
+                        <select id="server-selector" multiple="multiple"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="refreshcdn">Refresh : </label>
+                    </td>
+                    <td>
+                        <label><input name="refreshcdn" type="radio" value="ucdn" />CDN</label>
+                        <label><input name="refreshcdn" type="radio" value="no" />No CDN</label>
+                    </td>
+                </tr>
+                <tr id="tr-domainId">
+                    <td><label for="domainId">DomainId: </label>
+                    </td>
+                    <td><input type="text" name="domainId" id="domainId"
+                               class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+                <tr id="tr-url">
+                    <td><label for="url">URL: </label>
+                    </td>
+                    <td><input type="text" name="url" id="url"
+                               class="text ui-widget-content ui-corner-all">
+                    </td>
+                </tr>
+            </table>
+
+        </fieldset>
+    </form>
+</div>
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/search.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/multiple-select.js"></script>
+<script type="text/javascript" src="js/fanui.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/base64.js"></script>
+</body>
+</html>

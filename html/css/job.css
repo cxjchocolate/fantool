@@ -1,0 +1,22 @@
+.job-container .job-body table tr td{
+    border: 1px solid #C0C0C0;
+}
+
+.job-container .job-body input{
+    border: 0;
+}
+
+.job-header {
+    margin-bottom: 5px;
+}
+
+.job-body {
+    margin-bottom: 5px;
+}
+
+
+div.job-tool {
+    float: left;
+    margin-right: 5px;
+    margin-left: 5px;
+}

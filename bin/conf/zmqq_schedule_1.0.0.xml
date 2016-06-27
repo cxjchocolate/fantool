@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="schedule_1.0.0" basedir="." default="commit">
+    <taskdef resource="net/sf/antcontrib/antlib.xml"/> 
+    <property name="dist" value="${soa}/trunk/Schedule_1.0/target/classes" />
+    <property name="jar_dir" value="${soa}/trunk/Schedule_1.0/target" />
+    <property name="prd_lib" value="${soa}/tags/zmqq_schedule_production_1.0.0/WebContent/WEB-INF/lib/"/>
+    <property name="tst_lib" value="${soa}/tags/zmqq_schedule_test_1.0.0/WebContent/WEB-INF/lib/"/>  
+    <property name="srcdir" value="${soa}/branches/zmqq_1.0.0" />
+    <tstamp />
+    <property name="jarfilename" value="${ant.project.name}-${DSTAMP}${TSTAMP}.jar" />    
+
+    <path id="targets">
+      <pathelement path="${prd_lib}"/>
+      <pathelement path="${tst_lib}"/>
+    </path>
+    <property name="commit_dir" value="${prd_lib} ${tst_lib}" />
+    <property name="update_dir" value="${soa} ${scm} ${haiyan}"/>
+    
+    <fileset id="deploylib" dir="${basedir}/../lib">
+		<include name="*.jar"/>
+    </fileset>
+
+    <!-- javac编译 -->
+    <target name="compile" depends="update">
+      <delete dir="${dist}" failonerror="false" deleteonexit="true" excludes="**/lib"/>
+        <mkdir dir="${dist}"/>
+     	<delete> 
+			  <fileset dir="${jar_dir}" includes="${ant.project.name}*.jar"/>
+      </delete>
+           
+      <javac nowarn="true" destdir="${dist}" source="1.7" target="1.7" encoding="utf-8" fork="true"  includeantruntime="false">
+            <!--<src path="${haiyan}/trunk/haiyan-common/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-config/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-exp/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-cache/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-database/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-orm/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-bill/src/main/java"/>
+            <src path="${haiyan}/trunk/haiyan-web/src/main/java"/>
+            <excludesfile name="${haiyan}/trunk/haiyan-database/src/main/java/haiyan/database/SybaseDatabase.java" />-->
+            <src path="${srcdir}/Activity_1.0/src/main/java"/>
+            <src path="${srcdir}/OMS_1.0/OMS/src/main/java"/> 
+            <src path="${srcdir}/OMS_1.0/Order/src/main/java"/>
+            <src path="${srcdir}/OMS_1.0/Product/src/main/java"/>
+            <src path="${srcdir}/OMS_1.0/UserCenter/src/main/java"/>
+            <src path="${srcdir}/OMS_1.0/DS/src/main/java"/>              
+            <src path="${srcdir}/OMS_1.0/Common/src/main/java"/>  
+            <src path="${srcdir}/Schedule_1.0/src/main/java"/>
+            <classpath>
+            	<fileset dir="${prd_lib}">  
+            		<include name="*.jar" />
+        		  </fileset>
+				      <fileset refid="deploylib"/>
+            </classpath>
+      </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+      <!--svn delete older targets/${ant.project.name}*.jar -->
+      <for list="" param="dir">
+      	<path refid="targets"/>
+      	<sequential>
+           <for list="" param="file"> 
+             <fileset dir="@{dir}">  
+               <include name="${ant.project.name}*.jar"/>  
+             </fileset>
+             <sequential>
+                <exec executable="svn" >
+			             <arg line="delete @{file}" />
+	              </exec>	
+             </sequential>
+           </for>
+	      </sequential>
+      </for>  
+
+		  <jar destfile="${jar_dir}/${jarfilename}" basedir="${dist}" excludes="*.xml,*.properties" />
+		  
+		  <!--copy & svn newer targets/${jarfilename} -->    
+      <for list="" param="dir">
+      	<path refid="targets"/>
+      	<sequential>
+          <copy file="${jar_dir}/${jarfilename}" todir="@{dir}" />
+          <exec executable="svn" >
+		        <arg line="add @{dir}/${jarfilename}"/>
+	        </exec>
+	      </sequential>
+      </for>  	      
+    </target>
+    
+    <!--update -->
+		<target name="update">
+			<for list="${update_dir}" param="dir">
+				<sequential>
+			    <exec executable="svn" >
+						<arg line="update @{dir} --username ${svn.user} --password ${svn.password}"/>
+	        </exec>
+	      </sequential>
+	    </for>
+		</target>
+
+			<!--commit -->
+		<target name="commit" depends="jar">
+			<exec executable="svn" >
+						<arg line="commit ${commit_dir} -m '-------ant target-------' --username ${svn.user} --password ${svn.password}"/>
+	    </exec>
+		</target> 
+</project>

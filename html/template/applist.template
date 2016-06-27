@@ -1,0 +1,18 @@
+<table>
+    <thead>
+        <tr>
+            <th>Brand Name</th>
+            <th>App Name</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.brand}}</td>
+            <td>{{obj.name}}</td>
+            <td><div class="script-tool" onclick="getApp({{obj.id}})"><i class="icon-edit"></i></div></td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>

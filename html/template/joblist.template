@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Job Name</th>
+            <th>创建日期</th>
+            <th>更新日期</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.name}}</td>
+            <td>{{obj.createtime}}</td>
+            <td>{{obj.lastupdate}}</td>
+            <td><div class="job-tool" onclick="getJob({{obj.id}})"><i class="icon-edit"></i></div><div class="job-tool" onclick="runJob({{obj.id}})"><i class="icon-play"></i></div></div></td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>

@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Host Name</th>
+            <th>Host IP</th>
+            <th>SSH Port</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for obj in objs %}
+        <tr>
+            <td>{{obj.name}}</td>
+            <td>{{obj.ip}}</td>
+            <td>{{obj.ssh_port}}</td>
+            <td>{{obj.type}}</td>
+        </tr>
+    {% end %}
+    </tbody>
+</table>
